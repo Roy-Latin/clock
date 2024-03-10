@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all origins
 
-@app.route('/api/time', methods=['GET'])
+@app.route('/')
 def get_current_time():
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")

@@ -34,26 +34,18 @@
     <script>
         function getCurrentTime() {
             // Dynamically construct the backend URL based on the current hostname
-            const backendUrl = 'http://backend:5000/api/time'; // Use the service name
-    
+            const backendUrl = `http://${window.location.hostname}:5000`;
+
             fetch(backendUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(data => {
-                    // Extract time string from the response
-                    const timeString = data.trim();
-                    document.getElementById('currentTime').textContent = timeString;
+                    document.getElementById('currentTime').textContent = data;
                 })
                 .catch(error => {
                     console.error('Error fetching time:', error);
-                    document.getElementById('currentTime').textContent = "Error: Failed to fetch data";
                 });
         }
-    
+
         getCurrentTime();
         setInterval(getCurrentTime, 1000); // Update time every second
     </script>
